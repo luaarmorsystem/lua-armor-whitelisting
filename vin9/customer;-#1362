@@ -1,0 +1,389 @@
+VIN9 = {
+    Silent = {
+        ["Enabled"] = false,
+        ["Prediction"] = 0.129,
+        ["Part"] = "HumanoidRootPart",
+        
+        ["UseAirShotPart"] = false,
+        ["AirShotPart"] = "Head",
+        
+        ["UseToggleKey"] = false, -- Use A Key To Enabled / Disabled The Silent
+        ["ToggleKey"] = "p",-- The Key To Enabled / Disabled The Silent
+        
+       
+    },
+    Camlock = {
+        ["Enabled"] = false,
+        ["Keybind"] = "c",
+        ["Prediction"] = 0.138,
+        ["Part"] = "HumanoidRootPart",
+        
+        ["UseSmoothing"] = false,
+        ["SmoothingAmount"] = 0.03141592,
+        ["EasingStyle"] = Enum.EasingStyle.Elastic,
+        ["EasingDirection"] = Enum.EasingDirection.InOut,
+        
+  
+    },
+    Both = {
+        ["Notifications"] = false,
+        ["Duration"] = 1,
+
+        ["UnlockOnTargetDeath"] = false,
+        ["UnlockOnOwnDeath"] = false,
+
+        ["FriendCheck"] = false, 
+        ["KoCheck"] = false,
+        ["GrabbedCheck"] = false,
+        ["CrewCheck"] = false,
+    }
+}
+
+if game.Players.LocalPlayer.UserId == 3018097058 or 2799279766 then
+    Status = "OWNER"
+else
+    Status = "BUYER"
+end
+
+local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
+local Camera = game:GetService("Workspace").CurrentCamera
+
+local CircleDrawing = Drawing.new("Circle")
+local DrawingCircle2 = Drawing.new("Circle")
+
+CircleDrawing.Color = Color3.fromRGB(255,255,255)
+CircleDrawing.Thickness = 1
+CircleDrawing.NumSides = 9e9
+CircleDrawing.Radius = 50*3
+CircleDrawing.Transparency = 0.4
+CircleDrawing.Visible = false
+CircleDrawing.Filled = false
+
+DrawingCircle2.Color = Color3.fromRGB(255,255,255)
+DrawingCircle2.Thickness = 1
+DrawingCircle2.NumSides = 9e9
+DrawingCircle2.Radius = 50*3
+DrawingCircle2.Transparency = 0.4
+DrawingCircle2.Visible = false
+DrawingCircle2.Filled = false
+
+game:GetService("RunService").Heartbeat:Connect(function()
+        DrawingCircle2.Position = Vector2.new(Mouse.X , Mouse.Y + 35)
+        CircleDrawing.Position = Vector2.new(Mouse.X,Mouse.Y+35)
+end)
+
+
+
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Consistt/Ui/main/UnLeaked"))()
+local Notif = library:InitNotifications()
+
+
+local LoadingXSX = Notif:Notify("Loading VIN9", 3, "information")
+wait(1)
+local LoadingXSX = Notif:Notify("STATUS:"..Status, 3, "information")
+
+library.title = "discord.gg/closetcheating"
+library:Introduction()
+wait(1)
+
+local Home = library:Init()
+
+local Menu = Home:NewTab("Menu")
+local Greetings = Menu:NewLabel("Hello, "..game.Players.LocalPlayer.DisplayName, "Center")
+
+local Legit = Home:NewTab("Legit")
+
+local SilentEnabled = Legit:NewToggle("Silent Aim", false, function(value)
+    VIN9.Silent.Enabled = value
+end):AddKeybind(Enum.KeyCode.P)
+
+local SilentCircleEnab = Legit:NewToggle("Show Circle", false, function(value)
+    CircleDrawing.Visible = value
+end)
+
+
+
+
+
+local SilentPredicition = Legit:NewTextbox("Silent Aim | Prediction", "", "0.138", "all", "small", true, false, function(val)
+    VIN9.Silent.Prediction = val
+end)
+
+local SilentRadius = Legit:NewSlider("Radius", "", true, "/", {min = 1, max = 100, default = 50}, function(value)
+    CircleDrawing.Radius = value*3
+end)
+
+
+local SilentBodyPart = Legit:NewSelector("Body Part", "HumanoidRootPart", {"Head", "UpperTorso","HumanoidRootPart","LowerTorso","LeftHand","RightHand", "LeftFoot","RightFoot"}, function(d)
+    VIN9.Silent.Part = d
+end)
+
+local Label1 = Legit:NewLabel("", "Center")--"left", "center", "right"
+
+local SilentUseJumpHitPart = Legit:NewToggle("Use Jump HitPart", false, function(value)
+    VIN9.Silent.UseAirShotPart = value
+end)
+
+local SilentJumpHitPart = Legit:NewSelector("Jump Body Part", "HumanoidRootPart", {"Head", "UpperTorso","HumanoidRootPart","LowerTorso","LeftHand","RightHand", "LeftFoot","RightFoot"}, function(d)
+    VIN9.Silent.AirShotPart = d
+end)
+
+
+
+
+local Misc = Home:NewTab("Both")
+
+local Notifications = Misc:NewToggle("Notifications", false, function(value)
+    VIN9.Both.Notifications = value
+end)
+
+local CamCircleV = Misc:NewSlider("Notifications Duration", "", true, "/", {min = 1, max = 10, default = 2}, function(value)
+    VIN9.Both.Duration = value
+end)
+
+local Checks = Misc:NewLabel("Checks", "Center")
+
+local aaUnlockOnOwnDeath = Misc:NewToggle("Unlock on Death", false, function(value)
+    VIN9.Both.UnlockOnOwnDeath = value
+end)
+
+local aaUnlj = Misc:NewToggle("Unlock on Target Death", false, function(value)
+    VIN9.Both.UnlockOnTargetDeath = value
+end)
+
+local aaU1h = Misc:NewToggle("Crew Check", false, function(value)
+    VIN9.Both.CrewCheck = value
+end)
+
+local aaUj = Misc:NewToggle("Friend Check", false, function(value)
+    VIN9.Both.FriendCheck = value
+end)
+
+local aa2 = Misc:NewToggle("KO Check", false, function(value)
+    VIN9.Both.KoCheck = value
+end)
+
+local aaf = Misc:NewToggle("Grabbed Check", false, function(value)
+    VIN9.Both.GrabbedCheck = value
+end)
+
+print("FullyLoaded")
+
+
+
+
+function Notify(Text)
+    game.StarterGui:SetCore("SendNotification", {
+        Title = ".gg/closetcheating",
+        Text = Text,
+        Duration = VIN9.Both.Duration,
+    })
+end
+
+
+
+game.Players.LocalPlayer:GetMouse().KeyDown:Connect(function(Keybind)
+    if VIN9.Silent.UseToggleKey then
+    if Keybind == VIN9.Silent.ToggleKey then
+        if VIN9.Silent.Enabled == false then
+            VIN9.Silent.Enabled = true
+            if VIN9.Silent.Circle.Visible == true then
+                CircleDrawing.Visible = true
+            end if VIN9.Both.Notifications then
+                    Notify("Silent  Enabled")
+                end
+            
+        elseif VIN9.Silent.Enabled == true then
+            VIN9.Silent.Enabled = false
+            if VIN9.Silent.Circle.Visible == true then
+                CircleDrawing.Visible = false
+            end if VIN9.Both.Notifications then
+                    Notify("Silent  Disabled")
+                end
+        end
+    end
+    end
+end)
+
+local function InsideSilentFov()
+	local target = nil
+	local distance = math.huge
+	local players = game:GetService("Players"):GetPlayers()
+	local localPlayer = game:GetService("Players").LocalPlayer
+	local camera = game:GetService("Workspace").CurrentCamera
+	
+	for _, player in pairs(players) do
+		if player ~= localPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") and player.Character:FindFirstChild("Humanoid") then
+			local castingFrom = CFrame.new(camera.CFrame.Position, player.Character[VIN9.Silent.Part].CFrame.Position) * CFrame.new(0, 0, -4)
+			local ray = Ray.new(castingFrom.Position, castingFrom.LookVector * 9000)
+			local hitPart, hitPosition = game:GetService("Workspace"):FindPartOnRayWithIgnoreList(ray, {localPlayer.Character:FindFirstChild("Head")})
+			local rootDistance = (player.Character[VIN9.Silent.Part].Position - hitPosition).magnitude
+		    
+			if rootDistance < 4 then
+				local rootPosition, visible = camera:WorldToViewportPoint(player.Character[VIN9.Silent.Part].Position)
+				if visible then
+					local realDistance = (Vector2.new(Mouse.X, Mouse.Y) - Vector2.new(rootPosition.X, rootPosition.Y)).Magnitude
+					if realDistance < distance and realDistance < CircleDrawing.Radius then
+						distance = realDistance
+						target = player.Character
+					end
+				end
+			end
+
+            if VIN9.Both.FriendCheck then
+                if game.Players.LocalPlayer:IsFriendsWith(player.UserId) then
+                    distance = nil
+					target = nil
+                end
+            end
+
+            if VIN9.Both.KoCheck then
+                if player.Character.BodyEffects["K.O"].Value then
+                    distance = nil
+					target = nil
+                end
+            end
+
+            if VIN9.Both.GrabbedCheck then
+                if player.Character:FindFirstChild("GRABBING_CONSTRAINT") then
+                    distance = nil
+				    target = nil
+                end
+            end
+
+
+             if VIN9.Both.CrewCheck then
+                if player.DataFolder.Information:FindFirstChild("Crew").Value == game.Players.LocalPlayer.DataFolder.Information:FindFirstChild("Crew").Value then
+                    distance = nil
+				    target = nil
+                end
+            end
+
+		end
+	end
+	return target
+end
+
+local function GetClosestPlayer()
+    local MousePos = game:GetService("Players").LocalPlayer:GetMouse().Hit.p
+    local closestPlayer = nil
+    local closestDistance = 9e9
+    for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+        if player ~= game.Players.LocalPlayer then
+            local distance = (player.Character.HumanoidRootPart.Position - MousePos).Magnitude
+            if distance < closestDistance then
+                closestPlayer = player
+                closestDistance = distance
+            end
+        end
+
+        if VIN9.Both.FriendCheck then 
+            if game.Players.LocalPlayer:IsFriendsWith(player.UserId) then
+                closestPlayer = nil
+                closestDistance = nil
+            end     
+        end
+
+        if VIN9.Both.KoCheck then
+            if player.Character.BodyEffects["K.O"].Value then
+                distance = nil
+				target = nil
+            end
+        end
+
+        if VIN9.Both.GrabbedCheck then
+            if player.Character:FindFirstChild("GRABBING_CONSTRAINT") then
+                distance = nil
+				target = nil
+            end
+        end
+
+
+
+        if VIN9.Both.CrewCheck then
+            if player.DataFolder.Information:FindFirstChild("Crew").Value == game.Players.LocalPlayer.DataFolder.Information:FindFirstChild("Crew").Value then
+                distance = nil
+				target = nil
+            end
+        end
+
+    end
+    return closestPlayer, closestDistance
+end
+
+Mouse.KeyDown:Connect(function(ChosenKeyTwo)
+    if VIN9.Camlock.Enabled == true then
+        if ChosenKeyTwo == VIN9.Camlock.Keybind then
+            if VIN9.Camlock.Enabled == false then
+                VIN9.Camlock.Enabled = true
+                MrChosenOne = GetClosestPlayer()
+                if VIN9.Both.Notifications then
+                    Notify("Attached Onto; "..ChosenPlayer.DisplayName)
+                end
+            elseif VIN9.Camlock.Enabled == true then
+                VIN9.Camlock.Enabled = false
+                if VIN9.Both.Notifications then
+                    Notify("No Longer Attached")
+                end
+            end
+        end
+    end
+end)
+
+Spawn(function()
+    while true do
+        task.wait()
+        if VIN9.Camlock.Enabled and MrChosenOne then
+            if VIN9.Camlock.UseSmoothing == true then
+                Camera.CFrame = Camera.CFrame:Lerp(CFrame.new(Camera.CFrame.p, MrChosenOne.Character[VIN9.Camlock.Part].Position + MrChosenOne.Character[VIN9.Camlock.Part].Velocity * VIN9.Camlock.Prediction) 
+                    , VIN9.Camlock.SmoothingAmount , VIN9.Camlock.EasingStyle, VIN9.Camlock.EasingDirection)
+            else
+                Camera.CFrame = CFrame.new(Camera.CFrame.p, MrChosenOne.Character[VIN9.Camlock.Part].Position + MrChosenOne.Character[VIN9.Camlock.Part].Velocity * VIN9.Camlock.Prediction)
+            end
+
+            if VIN9.Both.UnlockOnOwnDeath then
+                if game.Players.LocalPlayer.Character.BodyEffects["K.O"].Value then
+                    VIN9.Camlock.Enabled = false
+                    if VIN9.Both.Notifications then
+                        Notify("No Longer Attached")
+                    end
+                end
+            end 
+
+            if VIN9.Both.UnlockOnTargetDeath then
+                if MrChosenOne.Character.BodyEffects["K.O"].Value then
+                    VIN9.Camlock.Enabled = false
+                    if VIN9.Both.Notifications then
+                        Notify("No Longer Attached")
+                    end
+                end
+            end 
+        end
+
+
+    end
+end)
+
+local Goldy = nil
+Goldy = hookmetamethod(game, "__index", function(Plr, Index)
+    if VIN9.Silent.Enabled and Plr == Mouse and (Index:lower() == "hit") then	
+    	local MrsChosenOne = InsideSilentFov()
+    		if MrsChosenOne and MrsChosenOne[VIN9.Silent.Part] and MrsChosenOne:FindFirstChild("Humanoid") then
+    			return (Index:lower() == "hit" and MrsChosenOne[VIN9.Silent.Part].CFrame + (MrsChosenOne[VIN9.Silent.Part].AssemblyLinearVelocity * VIN9.Silent.Prediction))
+    		end
+    		return Goldy(Plr, Index)
+    	end
+	return Goldy(Plr, Index, Goldy(Plr, Index))
+end)
+
+if VIN9.Silent.UseAirShotPart == true then
+        MrsChosenOne.Character:WaitForChild("Humanoid").StateChanged:Connect(function(RisingState,FallingState)
+            if FallingState == Enum.HumanoidStateType.Freefall then
+                VIN9.Silent.Part = VIN9.Silent.AirShotPart
+            else
+                VIN9.Silent.Part = VIN9.Silent.Part
+        end
+    end)
+end
+
+print("Script Loaded!~")
